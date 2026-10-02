@@ -1,0 +1,5 @@
+$kind: http-request
+name: /alunos/id
+url: ""
+method: GET
+order: 1790966574090
