@@ -14,6 +14,7 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import br.com.senai.teste.service.AlunoService;
+import jakarta.validation.Valid;
 import br.com.senai.teste.model.Aluno;
 import org.springframework.http.ResponseEntity;
 
@@ -28,8 +29,11 @@ public class AlunoController {
     }
 
     @PostMapping
-    public ResponseEntity<Aluno> cadastrar(@RequestBody Aluno aluno) {
+    public ResponseEntity<Aluno> cadastrar(
+        @Valid @RequestBody Aluno aluno) {
+
         Aluno alunoCadastrado = alunoService.cadastrar(aluno);
+        
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(alunoCadastrado);
