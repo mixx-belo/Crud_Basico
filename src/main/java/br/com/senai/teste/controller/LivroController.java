@@ -14,6 +14,7 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import br.com.senai.teste.service.LivroService;
+import jakarta.validation.Valid;
 import br.com.senai.teste.model.Livro;
 import org.springframework.http.ResponseEntity;
 
@@ -28,8 +29,9 @@ public class LivroController {
     }
 
     @PostMapping
-    public ResponseEntity<Livro> cadastrar(@RequestBody Livro livro) {
+    public ResponseEntity<Livro> cadastrar(@Valid @RequestBody Livro livro) {
         Livro livroCadastrado = livroService.cadastrar(livro);
+
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(livroCadastrado);
@@ -58,7 +60,7 @@ public class LivroController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Livro> atualizar(
-            @PathVariable Integer id,
+            @Valid @PathVariable Integer id,
             @RequestBody Livro novosDados) {
 
         Optional<Livro> livroAtualizado = livroService.atualizar(id, novosDados);
