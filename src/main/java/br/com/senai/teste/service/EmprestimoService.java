@@ -1,6 +1,7 @@
 package br.com.senai.teste.service;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
@@ -45,6 +46,14 @@ public class EmprestimoService {
             emprestimo.setDataEmprestimo(LocalDate.now());
 
             return Optional.of(emprestimoRepository.save(emprestimo));
+        }
+
+        public List<Emprestimo> listar() {
+            return emprestimoRepository.findAll();
+        }
+
+        public Optional<Emprestimo> buscarPorId(Integer id) {
+            return emprestimoRepository.findById(id);
         }
     }
 
