@@ -8,21 +8,21 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 
-@Entity 
-@Table (name = "livro")
+@Entity
+@Table(name = "livro")
 public class Livro {
-    
-    @Id 
+
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @NotBlank (message = "O título é obrigatório")
+    @NotBlank(message = "O título é obrigatório")
     private String titulo;
 
-    @NotBlank (message = "O autor é obrigatório")
+    @NotBlank(message = "O autor é obrigatório")
     private String autor;
 
-    @Min (value = 1, message = "O ano de publicação deve ser maior que zero")
+    @Min(value = 1, message = "O ano de publicação deve ser maior que zero")
     private Integer anoPublicacao;
 
     public Livro() {
@@ -62,5 +62,3 @@ public class Livro {
         this.anoPublicacao = anoPublicacao;
     }
 }
-
-

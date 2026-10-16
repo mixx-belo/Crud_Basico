@@ -30,10 +30,10 @@ public class AlunoController {
 
     @PostMapping
     public ResponseEntity<Aluno> cadastrar(
-        @Valid @RequestBody Aluno aluno) {
+            @Valid @RequestBody Aluno aluno) {
 
         Aluno alunoCadastrado = alunoService.cadastrar(aluno);
-        
+
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(alunoCadastrado);
@@ -74,7 +74,7 @@ public class AlunoController {
         return ResponseEntity.notFound().build();
     }
 
-    @DeleteMapping ("/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> excluir(
             @PathVariable Integer id) {
 

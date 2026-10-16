@@ -1,5 +1,6 @@
 package br.com.senai.teste.controller;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,8 +18,8 @@ import br.com.senai.teste.dto.EmprestimoRequest;
 import br.com.senai.teste.model.Emprestimo;
 import br.com.senai.teste.service.EmprestimoService;
 
-@RestController 
-@RequestMapping ("/emprestimos")
+@RestController
+@RequestMapping("/emprestimos")
 public class EmprestimoController {
 
     private final EmprestimoService emprestimoService;
@@ -29,34 +30,36 @@ public class EmprestimoController {
 
     @PostMapping
     public ResponseEntity<Emprestimo> cadastrar(
-        @RequestBody EmprestimoRequest dados) {
+            @RequestBody EmprestimoRequest dados) {
 
-            Integer alunoId = dados.getAlunoId();
-            Integer livroId = dados.getLivroId();
+        Integer alunoId = dados.getAlunoId();
+        Integer livroId = dados.getLivroId();
 
-            if (alunoId == null || livroId == null) {
-                return ResponseEntity.badRequest().build();
-            }
+        LocalDate dataPrevisaoEmprestimo = dados.getDataPrevisaoEmprestimo();
 
-        Optional<Emprestimo> emprestimo = emprestimoService.cadastrar(alunoId, livroId);
+        if (alunoId == null || livroId == null) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        Optional<Emprestimo> emprestimo = emprestimoService.cadastrar(alunoId, livroId, dataPrevisaoEmprestimo);
 
         if (emprestimo.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
 
         return ResponseEntity
-        .status(HttpStatus.CREATED)
-        .body(emprestimo.get());
+                .status(HttpStatus.CREATED)
+                .body(emprestimo.get());
     }
 
-    @GetMapping 
+    @GetMapping
     public ResponseEntity<List<Emprestimo>> listar() {
         return ResponseEntity.ok(emprestimoService.listar());
     }
 
-    @GetMapping ("/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Emprestimo> buscarPorId(@PathVariable Integer id) {
-       
+
         Optional<Emprestimo> emprestimo = emprestimoService.buscarPorId(id);
 
         if (emprestimo.isEmpty()) {
@@ -66,9 +69,9 @@ public class EmprestimoController {
         return ResponseEntity.ok(emprestimo.get());
     }
 
-    @PatchMapping ("/{id}/devolucao")
+    @PatchMapping("/{id}/devolucao")
     public ResponseEntity<Emprestimo> devolver(
-        @PathVariable Integer id) {
+            @PathVariable Integer id) {
 
         Optional<Emprestimo> emprestimo = emprestimoService.devolver(id);
 
@@ -82,6 +85,18 @@ public class EmprestimoController {
     @GetMapping("/ativos")
     public ResponseEntity<List<Emprestimo>> listarAtivos() {
         List<Emprestimo> emprestimos = emprestimoService.listarAtivos();
+        return ResponseEntity.ok(emprestimos);
+    }
+
+    @GetMapping("/aluno/{alunoId}")
+    public ResponseEntity<List<Emprestimo>> listarPorAluno(@PathVariable Integer alunoId) {
+        List<Emprestimo> emprestimos = emprestimoService.listarPorAluno(alunoId);
+        return ResponseEntity.ok(emprestimos);
+    }
+
+    @GetMapping("/livro/{livroId}")
+    public ResponseEntity<List<Emprestimo>> listarPorLivro(@PathVariable Integer livroId) {
+        List<Emprestimo> emprestimos = emprestimoService.listarPorLivro(livroId);
         return ResponseEntity.ok(emprestimos);
     }
 }

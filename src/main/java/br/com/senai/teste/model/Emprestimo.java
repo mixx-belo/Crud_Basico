@@ -10,24 +10,26 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
-@Entity 
-@Table (name = "emprestimo")
+@Entity
+@Table(name = "emprestimo")
 public class Emprestimo {
 
     @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     private LocalDate dataEmprestimo;
     private LocalDate dataDevolucao;
 
-    @ManyToOne 
-    @JoinColumn (name = "aluno_id", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "aluno_id", nullable = false)
     private Aluno aluno;
 
-    @ManyToOne 
-    @JoinColumn (name = "livro_id", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "livro_id", nullable = false)
     private Livro livro;
+
+    private LocalDate dataPrevisaoDevolucao;
 
     public Emprestimo() {
     }
@@ -66,5 +68,13 @@ public class Emprestimo {
 
     public void setLivro(Livro livro) {
         this.livro = livro;
+    }
+
+    public LocalDate getDataPrevisaoDevolucao() {
+        return dataPrevisaoDevolucao;
+    }
+
+    public void setDataPrevisaoDevolucao(LocalDate dataPrevisaoDevolucao) {
+        this.dataPrevisaoDevolucao = dataPrevisaoDevolucao;
     }
 }

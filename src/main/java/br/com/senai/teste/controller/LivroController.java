@@ -72,7 +72,7 @@ public class LivroController {
         return ResponseEntity.notFound().build();
     }
 
-    @DeleteMapping ("/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> excluir(
             @PathVariable Integer id) {
 

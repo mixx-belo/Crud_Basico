@@ -1,8 +1,11 @@
 package br.com.senai.teste.dto;
 
+import java.time.LocalDate;
+
 public class EmprestimoRequest {
     private Integer alunoId;
     private Integer livroId;
+    private LocalDate dataPrevisaoDevolucao;
 
     public EmprestimoRequest() {
     }
@@ -22,5 +25,12 @@ public class EmprestimoRequest {
     public void setLivroId(Integer livroId) {
         this.livroId = livroId;
     }
+
+    public LocalDate getDataPrevisaoEmprestimo() {
+        return dataPrevisaoDevolucao;
+    }                       
     
+    public void setDataPrevisaoEmprestimo(LocalDate dataPrevisaoDevolucao) {
+        this.dataPrevisaoDevolucao = dataPrevisaoDevolucao;
+    }
 }

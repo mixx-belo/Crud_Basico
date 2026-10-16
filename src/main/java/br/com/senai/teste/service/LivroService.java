@@ -7,7 +7,7 @@ import java.util.Optional;
 import br.com.senai.teste.model.Livro;
 import br.com.senai.teste.repository.LivroRepository;
 
-@Service 
+@Service
 public class LivroService {
 
     private final LivroRepository livroRepository;
@@ -52,5 +52,5 @@ public class LivroService {
         livroRepository.deleteById(id);
         return true;
     }
-    
+
 }
